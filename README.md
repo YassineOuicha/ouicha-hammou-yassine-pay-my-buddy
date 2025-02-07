@@ -1,4 +1,3 @@
-Le Modèle Physique de Données (MPD) :
 Ce modèle physique de données (MPD) décrit la structure de la base de données utilisée pour l'application "Pay My Buddy".
 
 La base de données est composée de trois principales tables : user, transaction, et connections. 
