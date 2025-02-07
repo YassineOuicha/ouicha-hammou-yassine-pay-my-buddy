@@ -7,11 +7,11 @@ Description des tables :
 1. Table user :
 La table user contient des informations sur les utilisateurs de l'application.
 
-  Colonnes :
-            id (INT, PRIMARY KEY, AUTO_INCREMENT) : Identifiant unique de l'utilisateur.
-            username (VARCHAR(100), NOT NULL) : Nom d'utilisateur.
-            email (VARCHAR(255), UNIQUE, NOT NULL) : Adresse email de l'utilisateur (doit être unique).
-            password (VARCHAR(255), NOT NULL) : Mot de passe de l'utilisateur (crypté pour des raisons de sécurité).
+Colonnes :
+id (INT, PRIMARY KEY, AUTO_INCREMENT) : Identifiant unique de l'utilisateur.
+username (VARCHAR(100), NOT NULL) : Nom d'utilisateur.
+email (VARCHAR(255), UNIQUE, NOT NULL) : Adresse email de l'utilisateur (doit être unique).
+password (VARCHAR(255), NOT NULL) : Mot de passe de l'utilisateur (crypté pour des raisons de sécurité).
             
 2. Table transaction :
 La table transaction contient des informations sur les transactions effectuées entre les utilisateurs.
