@@ -1,4 +1,4 @@
-package pay_my_buddy;
+package pay_my_buddy.model;
 
 import jakarta.persistence.*;
 import lombok.Data;

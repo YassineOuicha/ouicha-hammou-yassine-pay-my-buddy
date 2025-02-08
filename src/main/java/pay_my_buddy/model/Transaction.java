@@ -1,4 +1,4 @@
-package pay_my_buddy;
+package pay_my_buddy.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -19,7 +19,7 @@ public class Transaction {
     @ManyToOne
     @JoinColumn (name = "receiver_id", nullable = false)
     private User receiver;
-    
+
     private String description;
 
     @Column(nullable = false)
