@@ -1,4 +1,4 @@
-package com.ouicha_hammou_yassine.pay_my_buddy;
+package pay_my_buddy;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

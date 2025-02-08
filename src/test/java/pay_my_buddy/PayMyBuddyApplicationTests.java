@@ -1,4 +1,4 @@
-package com.ouicha_hammou_yassine.pay_my_buddy;
+package pay_my_buddy;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
