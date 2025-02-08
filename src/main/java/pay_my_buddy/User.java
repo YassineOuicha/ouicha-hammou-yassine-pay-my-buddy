@@ -23,5 +23,19 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @OneToMany(mappedBy = "sender")
+    private Set<Transaction> sentTransactions;
+
+    @OneToMany(mappedBy = "receiver")
+    private Set<Transaction> receivedTransactions;
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "connections",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "friend_id")
+    )
+    private Set<User> friends;
 
 }
