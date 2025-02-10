@@ -48,4 +48,8 @@ public class UserService {
     public User getConnectedUser() {
         return userRepository.findAll().stream().findFirst().orElse(null);
     }
+
+    public Optional<User> findById(long userId) {
+        return userRepository.findById(userId);
+    }
 }
