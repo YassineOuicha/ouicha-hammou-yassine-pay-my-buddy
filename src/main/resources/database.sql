@@ -37,4 +37,6 @@ SELECT * FROM transaction;
 USE pay_my_buddy_test;
 SELECT * FROM connections;
 
-
+-- Adding balance property to user so we can prevent negative transactions
+-- Ensure easy access to the user’s balance
+ALTER TABLE user ADD COLUMN balance DOUBLE NOT NULL DEFAULT 0;

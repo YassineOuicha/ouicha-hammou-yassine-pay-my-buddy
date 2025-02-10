@@ -12,6 +12,7 @@ La base de données est composée de trois principales tables : `user`, `transac
 - `username` (`VARCHAR(100)`, NOT NULL) : Nom d'utilisateur.
 - `email` (`VARCHAR(255)`, UNIQUE, NOT NULL) : Adresse email de l'utilisateur (doit être unique).
 - `password` (`VARCHAR(255)`, NOT NULL) : Mot de passe de l'utilisateur (crypté pour des raisons de sécurité).
+- `balance` (`DOUBLE`, NOT NULL) : Le solde de l'utilisateur initialisé à 0.
 
 **Table transaction** : La table `transaction` contient des informations sur les transactions effectuées entre les utilisateurs.  
 **Colonnes** :
