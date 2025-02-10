@@ -20,13 +20,13 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     @Transactional
-    public User registerUser(String username, String email, String password){
+    public void registerUser(String username, String email, String password){
         User user = new User();
         user.setEmail(email);
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
         user.setBalance(0.0);
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     public Optional<User> findByEmail(String email){
