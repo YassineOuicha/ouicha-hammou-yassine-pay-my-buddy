@@ -45,4 +45,7 @@ public class UserService {
         }
     }
 
+    public User getConnectedUser() {
+        return userRepository.findAll().stream().findFirst().orElse(null);
+    }
 }

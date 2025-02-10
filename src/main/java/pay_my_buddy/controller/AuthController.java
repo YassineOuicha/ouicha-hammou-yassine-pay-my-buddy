@@ -28,7 +28,7 @@ public class AuthController {
                               Model model){
         User user = userService.findByEmail(email).orElse(null);
         if(user!=null){
-            return "redirect:/transaction";
+            return "redirect:/dashboard";
         } else {
             model.addAttribute("error", "Incorrect email or password");
             return "login";
