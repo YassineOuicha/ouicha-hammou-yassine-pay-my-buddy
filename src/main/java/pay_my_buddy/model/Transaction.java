@@ -20,6 +20,7 @@ public class Transaction {
     @JoinColumn (name = "receiver_id", nullable = false)
     private User receiver;
 
+    @Column(length = 512)
     private String description;
 
     @Column(nullable = false)

@@ -29,6 +29,8 @@ public class User {
     @OneToMany(mappedBy = "receiver")
     private Set<Transaction> receivedTransactions;
 
+    @Column
+    private double balance;
 
     @ManyToMany
     @JoinTable(
