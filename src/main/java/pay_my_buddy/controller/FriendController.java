@@ -29,7 +29,7 @@ public class FriendController {
             return "redirect:/dashboard";
         } else {
             model.addAttribute("error", "No corresponding user for this email, please enter a valid email!");
-            return "connection";
+            return "friend";
         }
     }
 }

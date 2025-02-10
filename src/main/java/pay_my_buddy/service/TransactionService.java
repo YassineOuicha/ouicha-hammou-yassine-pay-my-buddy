@@ -46,8 +46,11 @@ public class TransactionService {
         return transactionRepository.save(transaction);
     }
 
+
     public List<Transaction> getTransactionsForUser(Long userId){
+
         return transactionRepository.findBySenderIdOrReceiverId(userId, userId);
     }
+
 
 }

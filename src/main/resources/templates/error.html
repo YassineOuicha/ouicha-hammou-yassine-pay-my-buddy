@@ -1,0 +1,15 @@
+<!-- error.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Error - Pay My Buddy</title>
+</head>
+<body>
+<div class="container">
+    <h2>An error occurred</h2>
+    <p th:text="${errorMessage}"></p>
+    <a th:href="@{/dashboard}">Back to Dashboard</a>
+</div>
+</body>
+</html>

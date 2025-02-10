@@ -75,3 +75,19 @@ INSERT INTO transaction (sender_id, receiver_id, description, amount) VALUES
 (8, 2, 'Pizza night', 12.00),
 (9, 4, 'Electric scooter rental', 9.50),
 (10, 6, 'Weekend trip contribution', 40.00);
+
+DESC user;
+DESC connections;
+DESC transaction;
+
+ALTER TABLE connections DROP FOREIGN KEY connections_ibfk_1;
+ALTER TABLE connections DROP FOREIGN KEY connections_ibfk_2;
+
+ALTER TABLE transaction DROP FOREIGN KEY transaction_ibfk_1;
+ALTER TABLE transaction DROP FOREIGN KEY transaction_ibfk_2;
+
+ALTER TABLE user MODIFY id BIGINT NOT NULL AUTO_INCREMENT;
+ALTER TABLE connections MODIFY user_id BIGINT NOT NULL;
+ALTER TABLE connections MODIFY friend_id BIGINT NOT NULL;
+ALTER TABLE transaction MODIFY sender_id BIGINT NOT NULL;
+ALTER TABLE transaction MODIFY receiver_id BIGINT NOT NULL;

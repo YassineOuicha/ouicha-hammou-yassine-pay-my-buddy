@@ -1,0 +1,19 @@
+<!-- friend.html (Add Friend) -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Friend - Pay My Buddy</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<div class="container">
+    <h2>Add a Friend</h2>
+    <form th:action="@{/connections/add}" method="post">
+        <input type="email" name="friendEmail" placeholder="Friend's Email" required>
+        <button type="submit">Add</button>
+    </form>
+    <a th:href="@{/dashboard}">Back to Dashboard</a>
+</div>
+</body>
+</html>

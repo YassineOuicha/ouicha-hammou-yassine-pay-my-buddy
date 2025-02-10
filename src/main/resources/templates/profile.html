@@ -1,0 +1,20 @@
+<!-- profile.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile - Pay My Buddy</title>
+</head>
+<body>
+<div class="container">
+    <h2>Edit Profile</h2>
+    <form th:action="@{/profile/update}" method="post">
+        <input type="text" name="username" placeholder="Username" th:value="${user.username}" required>
+        <input type="email" name="email" placeholder="Email" th:value="${user.email}" required>
+        <input type="password" name="password" placeholder="New Password">
+        <button type="submit">Update</button>
+    </form>
+    <a th:href="@{/dashboard}">Back to Dashboard</a>
+</div>
+</body>
+</html>
