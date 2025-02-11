@@ -1,22 +1,13 @@
-<!-- login.html (Login Page) -->
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Login - Pay My Buddy</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
-</head>
-<body>
-<div class="container">
-    <h2>Login</h2>
-    <form th:action="@{/login}" method="post">
-        <input type="email" name="username" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit">Login</button>
-    </form>
-    <p th:if="${param.error}" style="color:red;">Invalid email or password</p>
-    <p th:if="${param.logout}" style="color:green;">You have been logged out</p>
-    <p>Don't have an account? <a th:href="@{/register}">Sign up here</a></p>
-</div>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Connexion</h2>
+
+<form method="POST" action="{{ url_for('login') }}">
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="password" name="password" placeholder="Mot de passe" required>
+    <button type="submit">Se connecter</button>
+</form>
+
+<p>Pas encore inscrit ? <a href="{{ url_for('register') }}">Créer un compte</a></p>
+{% endblock %}

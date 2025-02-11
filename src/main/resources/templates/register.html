@@ -1,20 +1,12 @@
-<!-- register.html -->
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Register - Pay My Buddy</title>
-</head>
-<body>
-<div class="container">
-    <h2>Register</h2>
-    <form th:action="@{/register}" method="post">
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit">Sign Up</button>
-    </form>
-    <p>Already have an account? <a th:href="@{/login}">Login here</a></p>
-</div>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Inscription</h2>
+
+<form method="POST" action="{{ url_for('register') }}">
+    <input type="text" name="username" placeholder="Nom d'utilisateur" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="password" name="password" placeholder="Mot de passe" required>
+    <button type="submit">S'inscrire</button>
+</form>
+{% endblock %}

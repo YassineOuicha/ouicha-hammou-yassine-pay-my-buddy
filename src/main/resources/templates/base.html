@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pay My Buddy</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>{% block title %}Pay My Buddy{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-<!-- navigation bar-->
-<nav class="navbar">
+
+<nav>
     <div class="logo">Pay My Buddy</div>
     <ul>
-        <li><a href="transfer.html">Transférer</a></li>
-        <li><a href="profile.html">Profil</a></li>
-        <li><a href="add_friend.html">Ajouter relation</a></li>
-        <li><a href="logout.html">Se déconnecter</a></li>
+        <li><a href="{{ url_for('dashboard') }}">Transférer</a></li>
+        <li><a href="{{ url_for('profile') }}">Profil</a></li>
+        <li><a href="{{ url_for('friend') }}">Ajouter relation</a></li>
+        <li><a href="{{ url_for('logout') }}">Se déconnecter</a></li>
     </ul>
 </nav>
 
-<!-- dynamic content -->
 <div class="container">
     {% block content %}{% endblock %}
 </div>
+
 </body>
 </html>

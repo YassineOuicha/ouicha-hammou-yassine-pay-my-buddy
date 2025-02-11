@@ -1,43 +1,34 @@
-<!-- dashboard.html -->
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard - Pay My Buddy</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
-</head>
-<body>
-<div class="container">
-    <h2>Welcome, <span th:text="${user.username}"></span></h2>
-    <p>Balance: <span th:text="${user.balance}"></span> €</p>
+{% extends "base.html" %}
 
-    <!-- Payment Form -->
-    <h3>Make a Payment</h3>
-    <form th:action="@{/dashboard/payment}" method="post">
-        <select name="receiverId" required>
-            <option th:each="friend : ${friends}" th:value="${friend.id}" th:text="${friend.username}"></option>
-        </select>
-        <input type="text" name="description" placeholder="Description" required>
-        <input type="number" name="amount" placeholder="Amount" step="0.01" required>
-        <button type="submit">Pay</button>
-    </form>
+{% block content %}
+<h2>Effectuer une transaction</h2>
 
-    <!-- Transactions History -->
-    <h3>Transaction History</h3>
-    <ul>
-        <li th:each="tx : ${transactions}">
-            <span th:text="${tx.sender.username}"></span> sent
-            <span th:text="${tx.amount}"></span> € to
-            <span th:text="${tx.receiver.username}"></span> -
-            <span th:text="${tx.description}"></span>
-        </li>
-    </ul>
+<form method="POST" action="{{ url_for('dashboard') }}">
+    <label for="friend">Sélectionner une relation :</label>
+    <select name="friend" required>
+        {% for friend in friends %}
+        <option value="{{ friend.id }}">{{ friend.name }}</option>
+        {% endfor %}
+    </select>
 
-    <a th:href="@{/friend}">Add Friend</a>
-    <a th:href="@{/profile}">Edit Profile</a>
-    <form th:action="@{/logout}" method="post">
-        <button type="submit">Logout</button>
-    </form>
-</div>
-</body>
-</html>
+    <input type="text" name="description" placeholder="Description" required>
+    <input type="number" name="amount" placeholder="Montant (€)" required>
+    <button type="submit">Payer</button>
+</form>
+
+<h2>Mes Transactions</h2>
+<table>
+    <tr>
+        <th>Relations</th>
+        <th>Description</th>
+        <th>Montant</th>
+    </tr>
+    {% for transaction in transactions %}
+    <tr>
+        <td>{{ transaction.friend_name }}</td>
+        <td>{{ transaction.description }}</td>
+        <td>{{ transaction.amount }}€</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
