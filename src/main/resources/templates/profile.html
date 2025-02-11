@@ -3,9 +3,24 @@
 {% block content %}
 <h2>Modifier le profil</h2>
 
+<!-- Affichage des messages de succès ou d'erreur -->
+{% if success %}
+<p style="color:green;">{{ success }}</p>
+{% endif %}
+{% if error %}
+<p style="color:red;">{{ error }}</p>
+{% endif %}
+
 <form method="POST" action="{{ url_for('profile') }}">
-    <input type="text" name="username" value="{{ user.username }}" required>
-    <input type="email" name="email" value="{{ user.email }}" required>
+    <label for="username">Nom d'utilisateur :</label>
+    <input type="text" id="username" name="username" value="{{ user.username }}" required>
+
+    <label for="email">Email :</label>
+    <input type="email" id="email" name="email" value="{{ user.email }}" required>
+
+    <label for="password">Nouveau mot de passe :</label>
+    <input type="password" id="password" name="password" placeholder="Entrez un nouveau mot de passe">
+
     <button type="submit">Mettre à jour</button>
 </form>
 {% endblock %}
