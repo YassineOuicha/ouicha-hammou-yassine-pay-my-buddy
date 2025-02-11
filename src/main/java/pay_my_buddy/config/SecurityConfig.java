@@ -1,4 +1,4 @@
-package pay_my_buddy.conifg;
+package pay_my_buddy.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

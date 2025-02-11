@@ -1,6 +1,7 @@
 package pay_my_buddy.service;
 
 
+import com.fasterxml.jackson.core.Base64Variant;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -51,5 +52,13 @@ public class UserService {
 
     public Optional<User> findById(long userId) {
         return userRepository.findById(userId);
+    }
+
+    public PasswordEncoder getPasswordEncoder() {
+        return passwordEncoder;
+    }
+
+    public void updateUser(User user) {
+        userRepository.save(user);
     }
 }
