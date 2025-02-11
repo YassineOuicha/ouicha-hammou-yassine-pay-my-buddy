@@ -1,7 +1,9 @@
+<!-- error.html -->
 {% extends "base.html" %}
-
 {% block content %}
-<h2>Erreur</h2>
-<p>{{ message }}</p>
-<a href="{{ url_for('dashboard') }}">Retourner au tableau de bord</a>
+<div class="alert alert-danger text-center" role="alert">
+    <h2>Erreur</h2>
+    <p>{{ message }}</p>
+    <a href="{{ url_for('dashboard') }}" class="btn btn-primary">Retourner au tableau de bord</a>
+</div>
 {% endblock %}

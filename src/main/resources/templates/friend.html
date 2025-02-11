@@ -1,10 +1,11 @@
+<!-- friend.html -->
 {% extends "base.html" %}
-
 {% block content %}
-<h2>Ajouter une relation</h2>
-
-<form method="POST" action="{{ url_for('friend') }}">
-    <input type="email" name="email" placeholder="Saisir une adresse mail" required>
-    <button type="submit">Ajouter</button>
+<h2 class="text-center mb-4">Ajouter une relation</h2>
+<form method="POST" action="{{ url_for('friend') }}" class="p-4 border rounded bg-light">
+    <div class="mb-3">
+        <input type="email" class="form-control" name="email" placeholder="Saisir une adresse mail" required>
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Ajouter</button>
 </form>
 {% endblock %}

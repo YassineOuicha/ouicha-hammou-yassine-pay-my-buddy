@@ -1,26 +1,20 @@
+<!-- profile.html -->
 {% extends "base.html" %}
-
 {% block content %}
-<h2>Modifier le profil</h2>
-
-<!-- Affichage des messages de succès ou d'erreur -->
-{% if success %}
-<p style="color:green;">{{ success }}</p>
-{% endif %}
-{% if error %}
-<p style="color:red;">{{ error }}</p>
-{% endif %}
-
-<form method="POST" action="{{ url_for('profile') }}">
-    <label for="username">Nom d'utilisateur :</label>
-    <input type="text" id="username" name="username" value="{{ user.username }}" required>
-
-    <label for="email">Email :</label>
-    <input type="email" id="email" name="email" value="{{ user.email }}" required>
-
-    <label for="password">Nouveau mot de passe :</label>
-    <input type="password" id="password" name="password" placeholder="Entrez un nouveau mot de passe">
-
-    <button type="submit">Mettre à jour</button>
+<h2 class="text-center mb-4">Modifier le profil</h2>
+<form method="POST" action="{{ url_for('profile') }}" class="p-4 border rounded bg-light">
+    <div class="mb-3">
+        <label for="username" class="form-label">Nom d'utilisateur :</label>
+        <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email :</label>
+        <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Nouveau mot de passe :</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Entrez un nouveau mot de passe">
+    </div>
+    <button type="submit" class="btn btn-success w-100">Mettre à jour</button>
 </form>
 {% endblock %}
