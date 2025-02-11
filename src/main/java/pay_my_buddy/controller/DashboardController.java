@@ -41,8 +41,7 @@ public class DashboardController {
         User sender = userService.getConnectedUser();
 
         if(sender == null){
-            model.addAttribute("error", "User not connected");
-            return "dashboard";
+            return "redirect:/login";
         }
         Optional<User> receiverOpt = userService.findById(receiverId);
         if(receiverOpt.isEmpty()){

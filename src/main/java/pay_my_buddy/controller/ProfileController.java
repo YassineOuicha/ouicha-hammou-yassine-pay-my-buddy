@@ -18,10 +18,8 @@ public class ProfileController {
     @GetMapping("/profile")
     public String profilePage(Model model){
         User user = userService.getConnectedUser();
-
-        if(user==null){
-            model.addAttribute("error", "User not connected");
-            return "login";
+        if(user == null){
+            return "redirect:/login";
         }
         model.addAttribute("user", user);
         return "profile";
@@ -35,12 +33,13 @@ public class ProfileController {
 
         User user = userService.getConnectedUser();
         if (user == null){
-            model.addAttribute("error", "User not connected");
-            return "login";
+            return "redirect:/login";
         }
         user.setUsername(username);
         user.setEmail(email);
-        user.setPassword(userService.getPasswordEncoder().encode(password));
+        if (!password.isEmpty()) {
+            user.setPassword(userService.getPasswordEncoder().encode(password));
+        }
         userService.updateUser(user);
 
         model.addAttribute("user", user);

@@ -28,7 +28,7 @@ public class TransactionService {
         User receiver = userRepository.findById(receiverId)
                 .orElseThrow(()-> new RuntimeException("Receiver not found"));
 
-        if (sender.getBalance()<amount){
+        if (sender.getBalance() < amount){
             throw new RuntimeException("Insufficient balance");
         }
 
@@ -46,11 +46,7 @@ public class TransactionService {
         return transactionRepository.save(transaction);
     }
 
-
     public List<Transaction> getTransactionsForUser(Long userId){
-
         return transactionRepository.findBySenderIdOrReceiverId(userId, userId);
     }
-
-
 }

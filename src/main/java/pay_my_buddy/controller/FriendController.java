@@ -3,7 +3,6 @@ package pay_my_buddy.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pay_my_buddy.model.User;
@@ -17,17 +16,11 @@ public class FriendController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/friends/add")
-    public String getFriendPage(){
-        return "friend";
-    }
-
     @PostMapping("/friends/add")
     public String addFriend(@RequestParam("email") String email, Model model){
         User currentUser = userService.getConnectedUser();
         if(currentUser == null){
-            model.addAttribute("error", "User not connected, please login first!");
-            return "login";
+            return "redirect:/login";
         }
         Optional<User> friendOpt = userService.findByEmail(email);
         if(friendOpt.isPresent()){

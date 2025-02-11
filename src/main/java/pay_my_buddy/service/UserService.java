@@ -1,7 +1,6 @@
 package pay_my_buddy.service;
 
 
-import com.fasterxml.jackson.core.Base64Variant;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

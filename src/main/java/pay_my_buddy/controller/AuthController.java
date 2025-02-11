@@ -18,7 +18,6 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
-
     @GetMapping("/login")
     public String loginPage(){
         return "login";
@@ -54,13 +53,5 @@ public class AuthController {
             model.addAttribute("error", "Error while registering " + e.getMessage());
             return "register";
         }
-    }
-    @GetMapping("/logout")
-    public String logout(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
-        }
-        return "redirect:/login";
     }
 }
