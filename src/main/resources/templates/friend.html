@@ -1,11 +1,18 @@
-<!-- friend.html -->
-{% extends "base.html" %}
-{% block content %}
-<h2 class="text-center mb-4">Ajouter une relation</h2>
-<form method="POST" action="{{ url_for('friend') }}" class="p-4 border rounded bg-light">
-    <div class="mb-3">
-        <input type="email" class="form-control" name="email" placeholder="Saisir une adresse mail" required>
-    </div>
-    <button type="submit" class="btn btn-primary w-100">Ajouter</button>
-</form>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter une relation</title>
+</head>
+<body>
+<div th:replace="~{base :: content}">
+    <h2 class="text-center mb-4">Ajouter une relation</h2>
+    <form method="POST" action="/friends/add" class="p-4 border rounded bg-light">
+        <div class="mb-3">
+            <input type="email" class="form-control" name="email" placeholder="Saisir une adresse mail" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Ajouter</button>
+    </form>
+</div>
+</body>
+</html>

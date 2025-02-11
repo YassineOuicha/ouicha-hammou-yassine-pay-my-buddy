@@ -1,15 +1,22 @@
-<!-- login.html -->
-{% extends "base.html" %}
-{% block content %}
-<h2 class="text-center mb-4">Connexion</h2>
-<form method="POST" action="{{ url_for('login') }}" class="p-4 border rounded bg-light">
-    <div class="mb-3">
-        <input type="email" class="form-control" name="email" placeholder="Email" required>
-    </div>
-    <div class="mb-3">
-        <input type="password" class="form-control" name="password" placeholder="Mot de passe" required>
-    </div>
-    <button type="submit" class="btn btn-success w-100">Se connecter</button>
-</form>
-<p class="text-center mt-3">Pas encore inscrit ? <a href="{{ url_for('register') }}">Créer un compte</a></p>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion</title>
+</head>
+<body>
+<div th:replace="~{base :: content}">
+    <h2 class="text-center mb-4">Connexion</h2>
+    <form method="POST" action="/login" class="p-4 border rounded bg-light">
+        <div class="mb-3">
+            <input type="email" class="form-control" name="email" placeholder="Email" required>
+        </div>
+        <div class="mb-3">
+            <input type="password" class="form-control" name="password" placeholder="Mot de passe" required>
+        </div>
+        <button type="submit" class="btn btn-success w-100">Se connecter</button>
+    </form>
+    <p class="text-center mt-3">Pas encore inscrit ? <a href="/register">Créer un compte</a></p>
+</div>
+</body>
+</html>

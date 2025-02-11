@@ -1,9 +1,16 @@
-<!-- error.html -->
-{% extends "base.html" %}
-{% block content %}
-<div class="alert alert-danger text-center" role="alert">
-    <h2>Erreur</h2>
-    <p>{{ message }}</p>
-    <a href="{{ url_for('dashboard') }}" class="btn btn-primary">Retourner au tableau de bord</a>
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Erreur</title>
+</head>
+<body>
+<div th:replace="~{base :: content}">
+    <div class="alert alert-danger text-center" role="alert">
+        <h2>Erreur</h2>
+        <p th:text="${errorMessage}">Une erreur s'est produite.</p>
+        <a href="/dashboard" class="btn btn-primary">Retourner au tableau de bord</a>
+    </div>
 </div>
-{% endblock %}
+</body>
+</html>

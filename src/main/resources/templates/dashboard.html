@@ -1,41 +1,45 @@
-<!-- dashboard.html -->
-{% extends "base.html" %}
-{% block content %}
-<h2 class="text-center mb-4">Effectuer une transaction</h2>
-<form method="POST" action="{{ url_for('dashboard') }}" class="p-4 border rounded bg-light">
-    <div class="mb-3">
-        <label for="friend" class="form-label">Sélectionner une relation :</label>
-        <select class="form-select" name="friend" required>
-            {% for friend in friends %}
-            <option value="{{ friend.id }}">{{ friend.name }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <div class="mb-3">
-        <input type="text" class="form-control" name="description" placeholder="Description" required>
-    </div>
-    <div class="mb-3">
-        <input type="number" class="form-control" name="amount" placeholder="Montant (€)" required>
-    </div>
-    <button type="submit" class="btn btn-primary w-100">Payer</button>
-</form>
-<h2 class="mt-5">Mes Transactions</h2>
-<table class="table table-striped mt-3">
-    <thead>
-    <tr>
-        <th>Relations</th>
-        <th>Description</th>
-        <th>Montant</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for transaction in transactions %}
-    <tr>
-        <td>{{ transaction.friend_name }}</td>
-        <td>{{ transaction.description }}</td>
-        <td>{{ transaction.amount }}€</td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+<div th:replace="~{base :: content}">
+    <h2 class="text-center mb-4">Effectuer une transaction</h2>
+    <form method="POST" action="/dashboard/payment" class="p-4 border rounded bg-light">
+        <div class="mb-3">
+            <label for="friend" class="form-label">Sélectionner une relation :</label>
+            <select class="form-select" id="friend" name="receiverId" required>
+                <option th:each="friend : ${friends}" th:value="${friend.id}" th:text="${friend.username}"></option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" name="description" placeholder="Description" required>
+        </div>
+        <div class="mb-3">
+            <input type="number" class="form-control" name="amount" placeholder="Montant (€)" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Payer</button>
+    </form>
+
+    <h2 class="mt-5">Mes Transactions</h2>
+    <table class="table table-striped mt-3">
+        <thead>
+        <tr>
+            <th>Relations</th>
+            <th>Description</th>
+            <th>Montant</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="transaction : ${transactions}">
+            <td th:text="${transaction.receiver.username}">Relation</td>
+            <td th:text="${transaction.description}">Description</td>
+            <td th:text="${transaction.amount} + ' €'">Montant</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,20 +1,27 @@
-<!-- profile.html -->
-{% extends "base.html" %}
-{% block content %}
-<h2 class="text-center mb-4">Modifier le profil</h2>
-<form method="POST" action="{{ url_for('profile') }}" class="p-4 border rounded bg-light">
-    <div class="mb-3">
-        <label for="username" class="form-label">Nom d'utilisateur :</label>
-        <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}" required>
-    </div>
-    <div class="mb-3">
-        <label for="email" class="form-label">Email :</label>
-        <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
-    </div>
-    <div class="mb-3">
-        <label for="password" class="form-label">Nouveau mot de passe :</label>
-        <input type="password" class="form-control" id="password" name="password" placeholder="Entrez un nouveau mot de passe">
-    </div>
-    <button type="submit" class="btn btn-success w-100">Mettre à jour</button>
-</form>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profil</title>
+</head>
+<body>
+<div th:replace="~{base :: content}">
+    <h2 class="text-center mb-4">Modifier le profil</h2>
+    <form method="POST" action="/profile/update" class="p-4 border rounded bg-light">
+        <div class="mb-3">
+            <label for="username" class="form-label">Nom d'utilisateur :</label>
+            <input type="text" class="form-control" id="username" name="username" th:value="${user.username}" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email :</label>
+            <input type="email" class="form-control" id="email" name="email" th:value="${user.email}" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Nouveau mot de passe :</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Entrez un nouveau mot de passe">
+        </div>
+        <button type="submit" class="btn btn-success w-100">Mettre à jour</button>
+    </form>
+</div>
+</body>
+</html>

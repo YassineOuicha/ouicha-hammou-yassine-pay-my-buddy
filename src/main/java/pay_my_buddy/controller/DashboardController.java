@@ -23,9 +23,9 @@ public class DashboardController {
     private UserService userService;
 
     @GetMapping("/dashboard")
-    public String dashboard(Model model){
+    public String dashboard(Model model) {
         User connectedUser = userService.getConnectedUser();
-        if (connectedUser!=null){
+        if (connectedUser != null) {
             model.addAttribute("user", connectedUser);
             model.addAttribute("transactions", transactionService.getTransactionsForUser(connectedUser.getId()));
             model.addAttribute("friends", connectedUser.getFriends());
