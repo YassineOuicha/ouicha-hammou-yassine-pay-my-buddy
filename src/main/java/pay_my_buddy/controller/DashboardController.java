@@ -29,6 +29,8 @@ public class DashboardController {
             model.addAttribute("user", connectedUser);
             model.addAttribute("transactions", transactionService.getTransactionsForUser(connectedUser.getId()));
             model.addAttribute("friends", connectedUser.getFriends());
+
+            model.addAttribute("username", connectedUser.getUsername());
         }
         return "dashboard";
     }
