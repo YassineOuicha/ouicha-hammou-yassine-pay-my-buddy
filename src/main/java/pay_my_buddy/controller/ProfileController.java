@@ -22,6 +22,7 @@ public class ProfileController {
             return "redirect:/login";
         }
         model.addAttribute("user", user);
+        model.addAttribute("username", user.getUsername());
         return "profile";
     }
 
@@ -44,8 +45,6 @@ public class ProfileController {
 
         model.addAttribute("user", user);
         model.addAttribute("success", "Profile has been updated");
-
-        model.addAttribute("username", user.getUsername());
         return "profile";
     }
 

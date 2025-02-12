@@ -20,7 +20,11 @@ public class FriendController {
     private UserService userService;
 
     @GetMapping("/add")
-    public String showAddFriendPage(){
+    public String showAddFriendPage(Model model){
+        User currentUser = userService.getConnectedUser();
+        if (currentUser != null) {
+            model.addAttribute("username", currentUser.getUsername());
+        }
         return "friend";
     }
 
@@ -33,7 +37,6 @@ public class FriendController {
         Optional<User> friendOpt = userService.findByEmail(email);
         if(friendOpt.isPresent()){
             userService.addFriend(currentUser.getId(), friendOpt.get().getId());
-            model.addAttribute("username", currentUser.getUsername());
             return "redirect:/dashboard";
         } else {
             model.addAttribute("error", "No corresponding user for this email, please enter a valid email!");
