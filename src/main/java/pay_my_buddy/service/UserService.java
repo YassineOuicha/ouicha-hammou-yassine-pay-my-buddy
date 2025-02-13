@@ -2,7 +2,8 @@ package pay_my_buddy.service;
 
 
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pay_my_buddy.model.User;
@@ -13,11 +14,13 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Transactional
     public void registerUser(String username, String email, String password){
@@ -45,9 +48,17 @@ public class UserService {
         }
     }
 
+
     public User getConnectedUser() {
-        return userRepository.findAll().stream().findFirst().orElse(null);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return null;
+        }
+        String email = authentication.getName();
+        return userRepository.findByEmail(email)
+                .orElse(null);
     }
+
 
     public Optional<User> findById(long userId) {
         return userRepository.findById(userId);
@@ -58,6 +69,11 @@ public class UserService {
     }
 
     public void updateUser(User user) {
+        userRepository.save(user);
+    }
+
+    public void saveUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 }

@@ -1,7 +1,6 @@
 package pay_my_buddy.controller;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,22 +15,25 @@ import java.util.Optional;
 @Controller
 public class DashboardController {
 
-    @Autowired
-    private TransactionService transactionService;
 
-    @Autowired
-    private UserService userService;
+    private final TransactionService transactionService;
+    private final UserService userService;
+
+    public DashboardController(TransactionService transactionService, UserService userService) {
+        this.transactionService = transactionService;
+        this.userService = userService;
+    }
 
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
         User connectedUser = userService.getConnectedUser();
-        if (connectedUser != null) {
-            model.addAttribute("user", connectedUser);
-            model.addAttribute("transactions", transactionService.getTransactionsForUser(connectedUser.getId()));
-            model.addAttribute("friends", connectedUser.getFriends());
-
-            model.addAttribute("username", connectedUser.getUsername());
+        if (connectedUser == null) {
+            return "redirect:/login";
         }
+        model.addAttribute("user", connectedUser);
+        model.addAttribute("transactions", transactionService.getTransactionsForUser(connectedUser.getId()));
+        model.addAttribute("friends", connectedUser.getFriends());
+        model.addAttribute("username", connectedUser.getUsername());
         return "dashboard";
     }
 
