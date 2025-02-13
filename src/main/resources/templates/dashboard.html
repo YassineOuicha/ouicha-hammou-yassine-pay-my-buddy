@@ -28,6 +28,16 @@
 </nav>
 
 <div class="container mt-4">
+    <div class="card mb-4">
+        <div class="card-body">
+            <h4 class="card-title">Mon Solde actuel est : </h4>
+            <p class="card-text h3" th:class="${user.balance < 100 ? 'text-danger' : 'text-primary'}"
+               th:text="${#numbers.formatDecimal(user.balance, 1, 2) + ' €'}">0.00 €</p>
+            <div th:if="${user.balance < 100}" class="alert alert-warning mt-2">
+                Attention : votre solde est bas !
+            </div>
+        </div>
+    </div>
     <h2 class="text-center mb-4">Effectuer une transaction</h2>
     <form method="POST" action="/dashboard/payment" class="p-4 border rounded bg-light">
         <div class="mb-3">
