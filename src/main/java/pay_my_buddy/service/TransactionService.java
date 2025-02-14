@@ -23,10 +23,10 @@ public class TransactionService {
     public Transaction createTransaction(Long senderId, Long receiverId, String description, double amount){
 
         User sender = userRepository.findById(senderId)
-                .orElseThrow(()-> new RuntimeException("Sender not found"));
+                .orElseThrow(()-> new RuntimeException("Aucun utilisateur trouvé!"));
 
         User receiver = userRepository.findById(receiverId)
-                .orElseThrow(()-> new RuntimeException("Receiver not found"));
+                .orElseThrow(()-> new RuntimeException("Le destinataire n'est pas trouvé!"));
 
         if (sender.getBalance() < amount){
             return null;
