@@ -66,7 +66,36 @@ public class UserServiceTest {
 
         // Assert
         assertTrue(foundUser.isPresent());
-        assertEquals("yassine@example.com", foundUser.get().getEmail());
+        assertEquals(user.getEmail(), foundUser.get().getEmail());
     }
 
+    @Test
+    public void testFindById(){
+
+        // Arrange
+        User user = new User();
+        user.setId(1250000L);
+        when(userRepository.findById(1250000L)).thenReturn(Optional.of(user));
+        // Act
+        Optional<User> foundUser = userService.findById(1250000L);
+
+        // Assert
+        assertTrue(foundUser.isPresent());
+        assertEquals(user.getId(), foundUser.get().getId());
+    }
+
+    @Test
+    public void testUpdateUser(){
+
+        // Arrange
+        User user = new User();
+        user.setUsername("YassineUpdated");
+        when(userRepository.save(user)).thenReturn(user);
+
+        // Act
+        userService.updateUser(user);
+
+        // Assert
+        verify(userRepository, times(1)).save(user);
+    }
 }

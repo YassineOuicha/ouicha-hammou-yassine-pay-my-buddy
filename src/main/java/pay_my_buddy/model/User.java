@@ -103,4 +103,8 @@ public class User {
     public void setFriends(Set<User> friends) {
         this.friends = friends;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
