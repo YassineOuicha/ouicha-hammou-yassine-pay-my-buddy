@@ -34,7 +34,10 @@
             <p class="card-text h3" th:class="${user.balance < 100 ? 'text-danger' : 'text-primary'}"
                th:text="${#numbers.formatDecimal(user.balance, 1, 2) + ' €'}">0.00 €</p>
             <div th:if="${user.balance < 100}" class="alert alert-warning mt-2">
-                Attention : votre solde est bas !
+                Attention : votre solde est très bas !
+            </div>
+            <div th:if="${error}" class="alert alert-danger text-center">
+                <p th:text="${error}">solde insuffisant</p>
             </div>
         </div>
     </div>
