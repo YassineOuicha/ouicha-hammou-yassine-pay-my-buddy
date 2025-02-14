@@ -51,7 +51,7 @@ public class DashboardController {
         }
         Optional<User> receiverOpt = userService.findById(receiverId);
         if(receiverOpt.isEmpty()){
-            model.addAttribute("error", "receiver not found");
+            model.addAttribute("error", "Destinataire non trouvé dans la base de données!");
             return "dashboard";
         }
 
@@ -59,7 +59,7 @@ public class DashboardController {
         Transaction transaction = transactionService.createTransaction(sender.getId(), receiver.getId(), description, amount);
 
         if (transaction == null) {
-            model.addAttribute("error", "Votre solde est insuffisant.");
+            model.addAttribute("error", "Votre solde est insuffisant! Veuillez recharger votre compte.");
             return dashboard(model);
         }
 

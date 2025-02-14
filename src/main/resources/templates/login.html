@@ -11,10 +11,10 @@
     <h2 class="text-center mb-4">Connexion</h2>
 
     <div th:if="${param.error}" class="alert alert-danger">
-        Email ou mot de passe incorrect
+        Email ou mot de passe incorrect, veuillez réessayer
     </div>
     <div th:if="${param.logout}" class="alert alert-success">
-        Vous avez été déconnecté
+        Vous avez été déconnecté, merci d'avoir utilisé Pay My Buddy
     </div>
 
     <form method="POST" action="/login" class="p-4 border rounded bg-light">

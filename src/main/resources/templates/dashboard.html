@@ -19,8 +19,8 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" href="/dashboard">Transférer</a></li>
-                <li class="nav-item"><a class="nav-link" href="/profile">Profil</a></li>
-                <li class="nav-item"><a class="nav-link" href="/friends/add">Ajouter relation</a></li>
+                <li class="nav-item"><a class="nav-link" href="/profile"> Mon profil</a></li>
+                <li class="nav-item"><a class="nav-link" href="/friends/add">Ajouter une relation</a></li>
                 <li class="nav-item"><a class="nav-link text-danger" href="/logout">Se déconnecter</a></li>
             </ul>
         </div>
@@ -33,11 +33,11 @@
             <h4 class="card-title">Mon Solde actuel est : </h4>
             <p class="card-text h3" th:class="${user.balance < 100 ? 'text-danger' : 'text-primary'}"
                th:text="${#numbers.formatDecimal(user.balance, 1, 2) + ' €'}">0.00 €</p>
-            <div th:if="${user.balance < 100}" class="alert alert-warning mt-2">
+            <div th:if="${user.balance < 50}" class="alert alert-warning mt-2">
                 Attention : votre solde est très bas !
             </div>
             <div th:if="${error}" class="alert alert-danger text-center">
-                <p th:text="${error}">solde insuffisant</p>
+                <p th:text="${error}"></p>
             </div>
         </div>
     </div>
@@ -58,11 +58,11 @@
         <button type="submit" class="btn btn-primary w-100">Payer</button>
     </form>
 
-    <h2 class="mt-5">Mes Transactions</h2>
+    <h2 class="mt-5">Mon historique des transactions :</h2>
     <table class="table table-striped mt-3">
         <thead>
         <tr>
-            <th>Relations</th>
+            <th>Relation</th>
             <th>Description</th>
             <th>Montant</th>
         </tr>

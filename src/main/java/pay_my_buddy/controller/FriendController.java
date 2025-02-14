@@ -39,7 +39,7 @@ public class FriendController {
             userService.addFriend(currentUser.getId(), friendOpt.get().getId());
             return "redirect:/dashboard";
         } else {
-            model.addAttribute("error", "No corresponding user for this email, please enter a valid email!");
+            model.addAttribute("error", "Pas d'utilisateur correspondant à cette email!");
             return "friend";
         }
     }

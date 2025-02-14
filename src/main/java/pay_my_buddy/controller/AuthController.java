@@ -45,7 +45,7 @@ public class AuthController {
 
             return "redirect:/login";
         } catch (Exception e) {
-            model.addAttribute("error", "Error while registering: " + e.getMessage());
+            model.addAttribute("error", "Erreur lors de l'enregistrement: " + e.getMessage());
             return "register";
         }
     }
