@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import pay_my_buddy.model.Transaction;
 import pay_my_buddy.model.User;
 import pay_my_buddy.service.TransactionService;
 import pay_my_buddy.service.UserService;
@@ -34,6 +35,7 @@ public class DashboardController {
         model.addAttribute("transactions", transactionService.getTransactionsForUser(connectedUser.getId()));
         model.addAttribute("friends", connectedUser.getFriends());
         model.addAttribute("username", connectedUser.getUsername());
+        model.addAttribute("balance", connectedUser.getBalance());
         return "dashboard";
     }
 
@@ -54,13 +56,13 @@ public class DashboardController {
         }
 
         User receiver = receiverOpt.get();
+        Transaction transaction = transactionService.createTransaction(sender.getId(), receiver.getId(), description, amount);
 
-        try {
-            transactionService.createTransaction(sender.getId(), receiver.getId(), description, amount);
-            return "redirect:/dashboard";
-        } catch (Exception e) {
-            model.addAttribute("error", "Error during payment : " + e.getMessage());
-            return "dashboard";
+        if (transaction == null) {
+            model.addAttribute("error", "Votre solde est insuffisant.");
+            return dashboard(model);
         }
+
+        return "redirect:/dashboard";
     }
 }
