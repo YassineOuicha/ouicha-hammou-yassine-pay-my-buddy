@@ -30,6 +30,7 @@ public class AuthController {
         return "register";
     }
 
+
     @PostMapping("/register")
     public String handleRegister(@RequestParam("username") String username,
                                  @RequestParam("email") String email,
