@@ -46,7 +46,11 @@ public class TransactionService {
         return transactionRepository.save(transaction);
     }
 
-    public List<Transaction> getTransactionsForUser(Long userId){
-        return transactionRepository.findBySenderIdOrReceiverId(userId, userId);
+    public List<Transaction> getSentTransactions(String email){
+        return transactionRepository.findTransactionsSentByUser(email);
+    }
+
+    public List<Transaction> getReceivedTransactions(String email) {
+        return transactionRepository.findTransactionsReceivedByUser(email);
     }
 }

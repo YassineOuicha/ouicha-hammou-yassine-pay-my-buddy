@@ -32,7 +32,8 @@ public class DashboardController {
             return "redirect:/login";
         }
         model.addAttribute("user", connectedUser);
-        model.addAttribute("transactions", transactionService.getTransactionsForUser(connectedUser.getId()));
+        model.addAttribute("SentTransactions", transactionService.getSentTransactions(connectedUser.getEmail()));
+        model.addAttribute("ReceivedTransactions", transactionService.getReceivedTransactions(connectedUser.getEmail()));
         model.addAttribute("friends", connectedUser.getFriends());
         model.addAttribute("username", connectedUser.getUsername());
         model.addAttribute("balance", connectedUser.getBalance());
