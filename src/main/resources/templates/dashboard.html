@@ -45,7 +45,7 @@
     <form method="POST" action="/dashboard/payment" class="p-4 border rounded bg-light">
         <div class="mb-3">
             <label for="friend" class="form-label">Sélectionner une relation :</label>
-            <select class="form-select" id="friend" name="receiverId" required>
+            <select class="form-select" id="friend" name="receiverEmail" required>
                 <option th:each="friend : ${friends}" th:value="${friend.id}" th:text="${friend.username}"></option>
             </select>
         </div>

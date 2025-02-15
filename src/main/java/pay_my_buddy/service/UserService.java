@@ -59,11 +59,6 @@ public class UserService {
                 .orElse(null);
     }
 
-
-    public Optional<User> findById(long userId) {
-        return userRepository.findById(userId);
-    }
-
     public PasswordEncoder getPasswordEncoder() {
         return passwordEncoder;
     }

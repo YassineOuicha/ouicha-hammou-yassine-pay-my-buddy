@@ -41,7 +41,7 @@ public class DashboardController {
     }
 
     @PostMapping("/dashboard/payment")
-    public String handlePayment(@RequestParam("receiverId") long receiverId,
+    public String handlePayment(@RequestParam("receiverEmail") String receiverEmail,
                                 @RequestParam("description") String description,
                                 @RequestParam("amount") double amount,
                                 Model model){
@@ -50,7 +50,7 @@ public class DashboardController {
         if(sender == null){
             return "redirect:/login";
         }
-        Optional<User> receiverOpt = userService.findById(receiverId);
+        Optional<User> receiverOpt = userService.findByEmail(receiverEmail);
         if(receiverOpt.isEmpty()){
             model.addAttribute("error", "Destinataire non trouvé dans la base de données!");
             return "dashboard";

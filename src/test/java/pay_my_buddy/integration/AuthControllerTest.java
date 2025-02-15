@@ -55,8 +55,8 @@ public class AuthControllerTest {
         when(passwordEncoder.encode("password")).thenReturn("hashedPassword");
 
         mockMvc.perform(post("/register")
-                        .param("username", "YassineTest2")
-                        .param("email", "yassinetest2@example.com")
+                        .param("username", "YassineTest3")
+                        .param("email", "yassinetest3@example.com")
                         .param("password", "password"))
                         .andExpect(status().is3xxRedirection())
                         .andExpect(redirectedUrl("/login"));
