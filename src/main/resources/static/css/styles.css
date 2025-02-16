@@ -94,3 +94,14 @@ table {
     margin-top: 1rem;
     border-radius: 0.25rem;
 }
+.navbar-brand img {
+    max-height: 50px;
+    width: auto;
+    margin-right: 10px;
+}
+
+.table th, .table td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px;
+}
