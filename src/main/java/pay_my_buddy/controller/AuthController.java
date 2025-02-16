@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pay_my_buddy.model.User;
 import pay_my_buddy.service.UserService;
 
@@ -35,6 +36,7 @@ public class AuthController {
     public String handleRegister(@RequestParam("username") String username,
                                  @RequestParam("email") String email,
                                  @RequestParam("password") String password,
+                                 RedirectAttributes redirectAttributes,
                                  Model model) {
         try {
             if (userService.findByEmail(email).isPresent()) {
@@ -48,7 +50,7 @@ public class AuthController {
             user.setPassword(passwordEncoder.encode(password));
             userService.saveUser(user);
 
-            model.addAttribute("success", "Inscription réussie ! Connectez-vous.");
+            redirectAttributes.addFlashAttribute("success", "Inscription réussie ! Connectez-vous.");
             return "redirect:/login";
         } catch (Exception e) {
             model.addAttribute("error", "Erreur lors de l'enregistrement: " + e.getMessage());
