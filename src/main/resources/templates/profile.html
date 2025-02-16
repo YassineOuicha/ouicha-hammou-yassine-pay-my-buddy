@@ -40,6 +40,9 @@
 
 <main class="container mt-4">
     <h2 class="text-center mb-4">Modifier mon profil</h2>
+    <div th:if="${success}" class="alert alert-success text-center">
+        <p th:text="${success}"></p>
+    </div>
     <form method="POST" action="/profile/update" class="p-4 border rounded bg-light">
         <div class="mb-3">
             <label for="username" class="form-label">Nom d'utilisateur :</label>
