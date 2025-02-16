@@ -44,7 +44,7 @@ public class ProfileController {
         userService.updateUser(user);
 
         model.addAttribute("user", user);
-        model.addAttribute("success", "Votre profile est mis à jour!");
+        model.addAttribute("success", "Votre profil a été mis à jour avec succès !");
         return "profile";
     }
 

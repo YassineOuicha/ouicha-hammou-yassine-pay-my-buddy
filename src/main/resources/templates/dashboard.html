@@ -13,6 +13,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand text-primary" href="/" tabindex="0">
+                <img src="/images/PayMyBuddy.png" alt="Logo Pay My Buddy" width="50" height="50">
                 Pay My Buddy
             </a>
             <span class="navbar-text ms-2 fw-bold text-secondary" th:text="'(' + ${username} + ')'"></span>
@@ -78,16 +79,16 @@
         <caption class="visually-hidden">Liste des transactions reçues</caption>
         <thead>
         <tr>
-            <th scope="col">Expéditeur</th>
-            <th scope="col">Description</th>
-            <th scope="col">Montant</th>
+            <th scope="col" class="text-center">Expéditeur</th>
+            <th scope="col" class="text-center">Description</th>
+            <th scope="col" class="text-center">Montant</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="transaction : ${SentTransactions}">
-            <td th:text="${transaction.sender.username}">Expéditeur</td>
-            <td th:text="${transaction.description}">Description</td>
-            <td th:text="${transaction.amount} + ' €'">Montant</td>
+            <td class="text-center" th:text="${transaction.sender.username}">Expéditeur</td>
+            <td class="text-center" th:text="${transaction.description}">Description</td>
+            <td class="text-center" th:text="${#numbers.formatDecimal(transaction.amount, 1, 2) + ' €'}">Montant</td>
         </tr>
         </tbody>
     </table>
@@ -97,16 +98,16 @@
         <caption class="visually-hidden">Liste des transactions envoyées</caption>
         <thead>
         <tr>
-            <th scope="col">Destinataire</th>
-            <th scope="col">Description</th>
-            <th scope="col">Montant</th>
+            <th scope="col" class="text-center">Destinataire</th>
+            <th scope="col" class="text-center">Description</th>
+            <th scope="col" class="text-center">Montant</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="transaction : ${ReceivedTransactions}">
-            <td th:text="${transaction.receiver.username}">Destinataire</td>
-            <td th:text="${transaction.description}">Description</td>
-            <td th:text="${transaction.amount} + ' €'">Montant</td>
+            <td class="text-center" th:text="${transaction.receiver.username}">Destinataire</td>
+            <td class="text-center" th:text="${transaction.description}">Description</td>
+            <td class="text-center" th:text="${#numbers.formatDecimal(transaction.amount, 1, 2) + ' €'}">Montant</td>
         </tr>
         </tbody>
     </table>
