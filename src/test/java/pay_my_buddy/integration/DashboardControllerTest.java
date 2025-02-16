@@ -72,7 +72,6 @@ public class DashboardControllerTest {
                 .andExpect(model().attributeExists("user", "SentTransactions", "ReceivedTransactions"));
     }
 
-
     @Test
     @Transactional
     @WithMockUser(username = "frank@example.com")
