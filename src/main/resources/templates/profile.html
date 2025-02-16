@@ -7,40 +7,52 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-    <div class="container">
-        <a class="navbar-brand text-primary" href="/">Pay My Buddy</a>
-        <span class="navbar-text ms-2 fw-bold text-secondary" th:text="'(' + ${username} + ')'"></span>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="/dashboard">Transférer</a></li>
-                <li class="nav-item"><a class="nav-link" href="/profile">Mon profil</a></li>
-                <li class="nav-item"><a class="nav-link" href="/friends/add">Ajouter une relation</a></li>
-                <li class="nav-item"><a class="nav-link text-danger" href="/logout">Se déconnecter</a></li>
-            </ul>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand text-primary" href="/" tabindex="0">Pay My Buddy</a>
+            <span class="navbar-text ms-2 fw-bold text-secondary" th:text="'(' + ${username} + ')'"></span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" tabindex="0">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard" tabindex="0">Transférer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile" tabindex="0">Mon profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/friends/add" tabindex="0">Ajouter une relation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" href="/logout" tabindex="0">Se déconnecter</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
+</header>
 
-<h2 class="text-center mb-4">Modifier mon profil</h2>
-<form method="POST" action="/profile/update" class="p-4 border rounded bg-light">
-    <div class="mb-3">
-        <label for="username" class="form-label">Nom d'utilisateur :</label>
-        <input type="text" class="form-control" id="username" name="username" th:value="${user.username}" required>
-    </div>
-    <div class="mb-3">
-        <label for="email" class="form-label">Email :</label>
-        <input type="email" class="form-control" id="email" name="email" th:value="${user.email}" required>
-    </div>
-    <div class="mb-3">
-        <label for="password" class="form-label">Nouveau mot de passe :</label>
-        <input type="password" class="form-control" id="password" name="password" placeholder="Entrez un nouveau mot de passe">
-    </div>
-    <button type="submit" class="btn btn-success w-100">Mettre à jour</button>
-</form>
+<main class="container mt-4">
+    <h2 class="text-center mb-4">Modifier mon profil</h2>
+    <form method="POST" action="/profile/update" class="p-4 border rounded bg-light">
+        <div class="mb-3">
+            <label for="username" class="form-label">Nom d'utilisateur :</label>
+            <input type="text" class="form-control" id="username" name="username" th:value="${user.username}" required tabindex="0">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email :</label>
+            <input type="email" class="form-control" id="email" name="email" th:value="${user.email}" required tabindex="0">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Nouveau mot de passe :</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Entrez un nouveau mot de passe" tabindex="0">
+        </div>
+        <button type="submit" class="btn btn-success w-100" tabindex="0">Mettre à jour</button>
+    </form>
+</main>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

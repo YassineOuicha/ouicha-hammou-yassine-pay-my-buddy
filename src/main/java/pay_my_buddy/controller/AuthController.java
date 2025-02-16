@@ -37,13 +37,18 @@ public class AuthController {
                                  @RequestParam("password") String password,
                                  Model model) {
         try {
+            if (userService.findByEmail(email).isPresent()) {
+                model.addAttribute("error", "Cet email est déjà utilisé.");
+                return "register";
+            }
+
             User user = new User();
             user.setUsername(username);
             user.setEmail(email);
             user.setPassword(passwordEncoder.encode(password));
-
             userService.saveUser(user);
 
+            model.addAttribute("success", "Inscription réussie ! Connectez-vous.");
             return "redirect:/login";
         } catch (Exception e) {
             model.addAttribute("error", "Erreur lors de l'enregistrement: " + e.getMessage());
