@@ -70,21 +70,6 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testFindById(){
-
-        // Arrange
-        User user = new User();
-        user.setId(1250000L);
-        when(userRepository.findById(1250000L)).thenReturn(Optional.of(user));
-        // Act
-        Optional<User> foundUser = userService.findById(1250000L);
-
-        // Assert
-        assertTrue(foundUser.isPresent());
-        assertEquals(user.getId(), foundUser.get().getId());
-    }
-
-    @Test
     public void testUpdateUser(){
 
         // Arrange
@@ -97,5 +82,20 @@ public class UserServiceTest {
 
         // Assert
         verify(userRepository, times(1)).save(user);
+    }
+
+    @Test
+    public void testFindById(){
+
+        // Arrange
+        User user = new User();
+        user.setId(1250000L);
+        when(userRepository.findById(1250000L)).thenReturn(Optional.of(user));
+        // Act
+        Optional<User> foundUser = userService.findById(1250000L);
+
+        // Assert
+        assertTrue(foundUser.isPresent());
+        assertEquals(user.getId(), foundUser.get().getId());
     }
 }

@@ -48,6 +48,9 @@ public class UserService {
         }
     }
 
+    public Optional<User> findById(long userId) {
+        return userRepository.findById(userId);
+    }
 
     public User getConnectedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -57,11 +60,6 @@ public class UserService {
         String email = authentication.getName();
         return userRepository.findByEmail(email)
                 .orElse(null);
-    }
-
-
-    public Optional<User> findById(long userId) {
-        return userRepository.findById(userId);
     }
 
     public PasswordEncoder getPasswordEncoder() {

@@ -41,11 +41,12 @@ public class DashboardController {
     }
 
     @PostMapping("/dashboard/payment")
-    public String handlePayment(@RequestParam("receiverId") long receiverId,
+    public String handlePayment(@RequestParam("receiverId") Long receiverId,
                                 @RequestParam("description") String description,
                                 @RequestParam("amount") double amount,
                                 Model model){
         User sender = userService.getConnectedUser();
+
 
         if(sender == null){
             return "redirect:/login";
