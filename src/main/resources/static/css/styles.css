@@ -30,11 +30,18 @@ body {
 
 table {
     width: 100%;
+    border-collapse: collapse;
 }
 
 .table th, .table td {
     text-align: center;
     vertical-align: middle;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 .form-control {
@@ -94,14 +101,9 @@ table {
     margin-top: 1rem;
     border-radius: 0.25rem;
 }
+
 .navbar-brand img {
     max-height: 50px;
     width: auto;
     margin-right: 10px;
-}
-
-.table th, .table td {
-    text-align: center;
-    vertical-align: middle;
-    padding: 10px;
 }
