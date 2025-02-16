@@ -1,13 +1,13 @@
 package pay_my_buddy.integration;
 
 
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import pay_my_buddy.PayMyBuddyApplication;
 import pay_my_buddy.model.User;
@@ -45,25 +45,22 @@ public class AuthControllerTest {
                 .andExpect(view().name("register"));
     }
 
-
-    // Attention before every test we need to change the email
-    // because the user will be saved after each test
     @Test
-    @DirtiesContext
+    @Transactional
     public void testHandleRegisterSuccess() throws Exception {
         doNothing().when(userService).saveUser(any(User.class));
         when(passwordEncoder.encode("password")).thenReturn("hashedPassword");
 
         mockMvc.perform(post("/register")
-                        .param("username", "YassineTest3")
-                        .param("email", "yassinetest3@example.com")
+                        .param("username", "YassineTest4")
+                        .param("email", "yassinetest4@example.com")
                         .param("password", "password"))
                         .andExpect(status().is3xxRedirection())
                         .andExpect(redirectedUrl("/login"));
     }
 
     @Test
-    @DirtiesContext
+    @Transactional
     public void testHandleRegisterFailure() throws Exception {
 
         doThrow(new RuntimeException("Une erreur s'est produite !")).when(userService).saveUser(any(User.class));

@@ -1,5 +1,6 @@
 package pay_my_buddy.integration;
 
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import pay_my_buddy.PayMyBuddyApplication;
 import pay_my_buddy.model.User;
@@ -31,11 +31,11 @@ public class ProfileControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    @WithMockUser(username = "newEmail@example.com")
+    @WithMockUser(username = "yassine@example.com")
     public void testProfilePage() throws Exception {
         User connectedUser = new User();
-        connectedUser.setUsername("NewUsername");
-        connectedUser.setEmail("newEmail@example.com");
+        connectedUser.setUsername("Yassine");
+        connectedUser.setEmail("yassine@example.com");
 
         when(userService.getConnectedUser()).thenReturn(connectedUser);
 
@@ -45,14 +45,13 @@ public class ProfileControllerTest {
                 .andExpect(model().attributeExists("user", "username"));
     }
 
-    // Attention : this test may modify the database, change the email and username before re-run the test
     @Test
-    @DirtiesContext
-    @WithMockUser(username = "newEmail@example.com")
+    @Transactional
+    @WithMockUser(username = "yassine@example.com")
     public void testUpdateProfile() throws Exception {
         User user = new User();
-        user.setUsername("NewUsername");
-        user.setEmail("newEmail@example.com");
+        user.setUsername("Yassine");
+        user.setEmail("yassine@example.com");
 
         when(userService.getConnectedUser()).thenReturn(user);
         when(passwordEncoder.encode("newPassword")).thenReturn("hashedNewPassword");

@@ -1,18 +1,17 @@
 package pay_my_buddy.integration;
 
 
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import pay_my_buddy.PayMyBuddyApplication;
 import pay_my_buddy.model.User;
 import pay_my_buddy.service.UserService;
-
 import java.util.Optional;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -23,13 +22,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = PayMyBuddyApplication.class)
 public class FriendControllerTest {
 
-
     @Mock
     private UserService userService;
 
     @Autowired
     private MockMvc mockMvc;
-
 
     @Test
     @WithMockUser(username = "yassine@example.com")
@@ -46,7 +43,7 @@ public class FriendControllerTest {
     }
 
     @Test
-    @DirtiesContext
+    @Transactional
     @WithMockUser(username = "yassine@example.com")
     public void testAddFriendSuccess() throws Exception {
         User currentUser = new User();
@@ -66,11 +63,11 @@ public class FriendControllerTest {
     }
 
     @Test
-    @DirtiesContext
+    @Transactional
     @WithMockUser(username = "yassine@example.com")
     public void testAddFriendFailure() throws Exception {
         User currentUser = new User();
-        currentUser.setUsername("Yassine");
+        currentUser.setEmail("yassine@example.com");
 
         when(userService.getConnectedUser()).thenReturn(currentUser);
         when(userService.findByEmail("nonExistent@example.com")).thenReturn(Optional.empty());

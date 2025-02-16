@@ -1,13 +1,13 @@
 package pay_my_buddy.integration;
 
 
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import pay_my_buddy.PayMyBuddyApplication;
 import pay_my_buddy.model.Transaction;
@@ -74,25 +74,24 @@ public class DashboardControllerTest {
 
 
     @Test
-    @DirtiesContext
-    @WithMockUser(username = "charlie@example.com")
+    @Transactional
+    @WithMockUser(username = "frank@example.com")
     public void testHandlePayment() throws Exception {
 
         User sender = new User();
-        sender.setEmail("charlie@example.com");
-        sender.setBalance(1000.0);
+        sender.setEmail("frank@example.com");
 
         User receiver = new User();
+        receiver.setId(8L);
         receiver.setEmail("hugo@example.com");
-        receiver.setBalance(500.0);
 
         when(userService.getConnectedUser()).thenReturn(sender);
-        when(userService.findByEmail("hugo@example.com")).thenReturn(Optional.of(receiver));
+        when(userService.findById(8L)).thenReturn(Optional.of(receiver));
 
         mockMvc.perform(post("/dashboard/payment")
-                .param("receiverEmail", "hugo@example.com")
-                .param("description", "Test transaction of 50$ from charlie to hugo")
-                .param("amount", "50.0"))
+                .param("receiverId", "8")
+                .param("description", "Test transaction of 150$ from charlie to hugo")
+                .param("amount", "150"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/dashboard"));
     }

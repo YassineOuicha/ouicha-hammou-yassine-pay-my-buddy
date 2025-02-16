@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -39,7 +40,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "friend_id")
     )
-    private Set<User> friends;
+    private Set<User> friends = new HashSet<>();
 
     // Lombok doesn't work correctly
 
