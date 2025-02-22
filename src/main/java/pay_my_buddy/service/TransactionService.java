@@ -29,7 +29,7 @@ public class TransactionService {
                 .orElseThrow(()-> new RuntimeException("Le destinataire n'est pas trouvé!"));
 
         if (sender.getBalance() < amount){
-            return null;
+            throw new RuntimeException("Votre solde est insuffisant");
         }
 
         Transaction transaction = new Transaction();
