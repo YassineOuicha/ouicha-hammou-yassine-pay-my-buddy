@@ -37,6 +37,9 @@
             <label for="email" class="form-label">Adresse e-mail de l'ami :</label>
             <input type="email" class="form-control" id="email" name="email" placeholder="Saisir une adresse mail" required tabindex="0">
         </div>
+        <div th:if="${error}" class="alert alert-danger text-center" role="alert">
+            <p th:text="${error}"></p>
+        </div>
         <button type="submit" class="btn btn-primary w-100" tabindex="0">Ajouter</button>
     </form>
 </main>

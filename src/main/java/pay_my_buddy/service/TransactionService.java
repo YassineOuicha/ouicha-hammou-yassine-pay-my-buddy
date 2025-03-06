@@ -1,8 +1,10 @@
 package pay_my_buddy.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pay_my_buddy.exception.InsufficientBalanceException;
 import pay_my_buddy.model.Transaction;
 import pay_my_buddy.model.User;
 import pay_my_buddy.repository.TransactionRepository;
@@ -22,14 +24,26 @@ public class TransactionService {
     @Transactional
     public Transaction createTransaction(Long senderId, Long receiverId, String description, double amount){
 
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Le montant de la transaction doit être positif");
+        }
+
+        if (senderId == null || receiverId == null) {
+            throw new IllegalArgumentException("L'id de l'expéditeur et du destinataire ne peut pas être null");
+        }
+
+        if (senderId.equals(receiverId)) {
+            throw new IllegalStateException("Un utilisateur ne peut pas s'envoyer de l'argent à lui-même !");
+        }
+
         User sender = userRepository.findById(senderId)
-                .orElseThrow(()-> new RuntimeException("Aucun utilisateur trouvé!"));
+                .orElseThrow(()-> new EntityNotFoundException("Aucun utilisateur trouvé avec l'id : " + senderId));
 
         User receiver = userRepository.findById(receiverId)
-                .orElseThrow(()-> new RuntimeException("Le destinataire n'est pas trouvé!"));
+                .orElseThrow(()-> new EntityNotFoundException("Le destinataire n'est pas trouvé avec l'id : " + receiverId));
 
         if (sender.getBalance() < amount){
-            throw new RuntimeException("Votre solde est insuffisant");
+            throw new InsufficientBalanceException("Solde insuffisant pour effectuer la transaction");
         }
 
         Transaction transaction = new Transaction();
