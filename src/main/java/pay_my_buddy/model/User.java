@@ -42,8 +42,9 @@ public class User {
     )
     private Set<User> friends = new HashSet<>();
 
-    // Lombok doesn't work correctly
 
+
+    // Lombok doesn't work correctly
 
     public Long getId() {
         return id;

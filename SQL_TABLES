@@ -1,0 +1,41 @@
+SHOW DATABASES;
+CREATE DATABASE IF NOT EXISTS pay_my_buddy_test;
+
+USE pay_my_buddy_test;
+CREATE TABLE user (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(100) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    balance DOUBLE NOT NULL DEFAULT 0
+);
+
+USE pay_my_buddy_test;
+CREATE TABLE connections (
+    user_id BIGINT NOT NULL,
+    friend_id BIGINT NOT NULL,
+    PRIMARY KEY (user_id, friend_id),
+    FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
+    FOREIGN KEY (friend_id) REFERENCES user(id) ON DELETE CASCADE
+);
+
+USE pay_my_buddy_test;
+CREATE TABLE transaction (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    sender_id BIGINT NOT NULL,
+    receiver_id BIGINT NOT NULL,
+    description TEXT,
+    amount DOUBLE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (sender_id) REFERENCES user(id) ON DELETE CASCADE,
+    FOREIGN KEY (receiver_id) REFERENCES user(id) ON DELETE CASCADE
+);
+
+USE pay_my_buddy_test;
+SELECT * FROM user;
+
+USE pay_my_buddy_test;
+SELECT * FROM transaction;
+
+USE pay_my_buddy_test;
+SELECT * FROM connections;

@@ -20,7 +20,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @AutoConfigureMockMvc
 @SpringBootTest(classes = PayMyBuddyApplication.class)
-public class FriendControllerTest {
+public class
+FriendControllerTest {
 
     @Mock
     private UserService userService;
