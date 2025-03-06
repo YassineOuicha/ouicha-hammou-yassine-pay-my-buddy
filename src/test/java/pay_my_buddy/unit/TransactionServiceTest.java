@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import pay_my_buddy.exception.InsufficientBalanceException;
 import pay_my_buddy.model.Transaction;
 import pay_my_buddy.model.User;
 import pay_my_buddy.repository.TransactionRepository;
@@ -60,6 +61,7 @@ public class TransactionServiceTest {
         assertEquals(450, sender.getBalance());
         assertEquals(200, receiver.getBalance());
     }
+
     @Test
     public void testCreateTransactionWithInsufficientBalance(){
 
@@ -75,12 +77,15 @@ public class TransactionServiceTest {
         when(userRepository.findById(sender.getId())).thenReturn(Optional.of(sender));
         when(userRepository.findById(receiver.getId())).thenReturn(Optional.of(receiver));
 
-        // Act
-        Transaction transaction = transactionService.createTransaction(sender.getId(), receiver.getId(), "Test transaction", 50.0);
+        // Act & Assert
+        InsufficientBalanceException exception = assertThrows(InsufficientBalanceException.class, () -> {
+            transactionService.createTransaction(sender.getId(), receiver.getId(), "Test transaction", 50.0);
+        });
 
-        // Assert
-        assertNull(transaction);
+        // Assert that the exception message is as expected
+        assertEquals("Solde insuffisant pour effectuer la transaction", exception.getMessage());
     }
+
 
     @Test
     public void testGetSentTransactions(){
