@@ -31,16 +31,36 @@ public class FriendController {
     @PostMapping("/add")
     public String addFriend(@RequestParam("email") String email, Model model){
         User currentUser = userService.getConnectedUser();
-        if(currentUser == null){
+        if (currentUser == null) {
             return "redirect:/login";
         }
+
         Optional<User> friendOpt = userService.findByEmail(email);
-        if(friendOpt.isPresent()){
-            userService.addFriend(currentUser.getId(), friendOpt.get().getId());
-            return "redirect:/dashboard";
-        } else {
-            model.addAttribute("error", "Pas d'utilisateur correspondant à cette email!");
-            return "friend";
+
+        if (friendOpt.isEmpty()) {
+            model.addAttribute("error", "Pas d'utilisateur correspondant à cette adresse email : " + email);
+            return reloadFriendPage(model, currentUser);
         }
+
+        User friend = friendOpt.get();
+
+        if (friend.getId().equals(currentUser.getId())) {
+            model.addAttribute("error", "Vous ne pouvez pas vous ajouter vous-même en tant qu'ami !");
+            return reloadFriendPage(model, currentUser);
+        }
+
+        if (currentUser.getFriends().contains(friend)) {
+            model.addAttribute("error", "Cet utilisateur est déjà dans votre liste d'amis !");
+            return reloadFriendPage(model, currentUser);
+        }
+
+        userService.addFriend(currentUser.getId(), friend.getId());
+        return "redirect:/dashboard";
+    }
+
+    private String reloadFriendPage(Model model, User user) {
+        model.addAttribute("username", user.getUsername());
+        model.addAttribute("friends", user.getFriends());
+        return "friend";
     }
 }
