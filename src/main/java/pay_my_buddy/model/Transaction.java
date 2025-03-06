@@ -1,11 +1,7 @@
 package pay_my_buddy.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-@Data @Getter @Setter
 @Entity
 public class Transaction {
 
@@ -26,10 +22,6 @@ public class Transaction {
 
     @Column(nullable = false)
     private double amount;
-
-
-    // Lombok doesn't work correctly
-
 
     public Long getId() {
         return id;

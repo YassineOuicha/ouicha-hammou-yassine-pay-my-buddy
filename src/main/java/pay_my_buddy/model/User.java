@@ -1,14 +1,10 @@
 package pay_my_buddy.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-
-
 import java.util.HashSet;
 import java.util.Set;
 
 
-@Data
 @Entity
 public class User {
 
@@ -41,10 +37,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "friend_id")
     )
     private Set<User> friends = new HashSet<>();
-
-
-
-    // Lombok doesn't work correctly
 
     public Long getId() {
         return id;
